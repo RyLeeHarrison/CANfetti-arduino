@@ -136,7 +136,7 @@ public:
 
 #ifdef USE_TWAI
     twai_message_t msg;
-    msg.id = message.id;
+    msg.identifier = message.id;
     msg.data_length_code = message.len;
     msg.flags = 0;
     if (message.flags.extended) msg.flags |= TWAI_MSG_FLAG_EXTD;
@@ -172,7 +172,7 @@ public:
     twai_message_t msg;
     bool result = (twai_receive(&msg, pdMS_TO_TICKS(timeout)) == ESP_OK);
     if (result) {
-      message.id = msg.id;
+      message.id = msg.identifier;
       message.len = msg.data_length_code;
       message.flags.extended = msg.flags & TWAI_MSG_FLAG_EXTD;
       message.flags.remote = msg.flags & TWAI_MSG_FLAG_RTR;
